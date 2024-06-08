@@ -1,14 +1,27 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { invoke } from "@tauri-apps/api/tauri";
 
-const greetMsg = ref("");
-const name = ref("");
-
-async function greet() {
-  greetMsg.value = await invoke("update_tasks", { });
+interface AnimalFacts {
+    text: string
 }
-</script>
+const catFacts = ref([] as AnimalFacts[])
+const fetchingFacts = ref(false)
+async function loadMoreFacts() {
+    fetchingFacts.value = true
+    const catFactsResponse = await axios.get<AnimalFacts[]>('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=5')
+    catFacts.value.push(...(catFactsResponse.data || []))
+
+    fetchingFacts.value = false
+}
+async function fetchInitialCatFacts() {
+    const catFactsResponse = await axios.get<AnimalFacts[]>('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=5')
+    catFacts.value = catFactsResponse.data
+}
+onMounted(async () => {
+    await fetchInitialCatFacts()
+})
+
+const</script>
 
 <template>
   <form class="row" @submit.prevent="greet">
