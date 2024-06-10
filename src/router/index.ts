@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ProjectView from '../views/ProjectView.vue'
 import About from "../views/AboutView.vue";
 import NotFound from "../views/NotFound.vue";
 import NetworkError from "../views/NetworkError.vue";
@@ -16,14 +17,26 @@ const routes = [
     component: About,
   },
   {
+    path: "/projects",
+    name: "Projects",
+    props: true,
+    component: ProjectView,
+  },
+  {
     path: "/project/:id",
     name: "Project",
+    props: true,
+    component: ProjectView,
+  },
+  {
+    path: "/tasks",
+    name: "Tasks",
     props: true,
     component: About,
   },
   {
     path: "/task/:id",
-    name: "Tasks",
+    name: "Task",
     props: true,
     component: About,
   },

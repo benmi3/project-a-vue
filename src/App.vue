@@ -11,7 +11,10 @@ import { RouterLink, RouterView } from 'vue-router'
 
         <nav class="text-slate-100 grid grid-cols-5">
           <RouterLink class="grid-cols-1" to="/">Home</RouterLink>
-          <RouterLink class="grid-cols-2" to="/about">About</RouterLink>
+          <RouterLink class="grid-cols-2" :to="{ name: 'TimeRecords' }">TimeRecords</RouterLink>
+          <RouterLink class="grid-cols-3" :to="{ name: 'Projects' }">Projects</RouterLink>
+          <RouterLink class="grid-cols-4" :to="{ name: 'Tasks' }">Tasks</RouterLink>
+          <RouterLink class="grid-cols-5" to="/about">About</RouterLink>
         </nav>
       </div>
     </header>
