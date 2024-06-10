@@ -11,8 +11,25 @@ const routes = [
     component: HomeView
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/timerecord",
+    name: "TimeRecord",
+    component: About,
+  },
+  {
+    path: "/project/:id",
+    name: "Project",
+    props: true,
+    component: About,
+  },
+  {
+    path: "/task/:id",
+    name: "Tasks",
+    props: true,
+    component: About,
+  },
+  {
+    path: "/tasktime",
+    name: "TaskTime",
     component: About,
   },
   {

@@ -1,12 +1,15 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import ProjectCard from "../components/ProjectCard.vue"
 import ProjectService from "../services/ProjectService.ts"
 
-const projects = ref(null)
+const props = defineProps({
+  id: { required: true, },
+});
+
+const project = ref(null)
 
 onMounted(() => {
-  ProjectService.getEvents()
+  ProjectService.getEvent(props.id)
     .then((response) => {
       project.value = response.data
     })
@@ -18,8 +21,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="projects">
-    <ProjectCard v-for="project in projects" :key="project.id" :project="project" />
+  <div class="about">
+    <h1 class="text-white">This is an about page</h1>
+    <p class="text-slate-400 ">This is darker</p>
   </div>
 </template>
 

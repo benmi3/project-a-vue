@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
+defineProps<{
+  msg: string
+}>()
 </script>
 
 <template>
-  <div class="bg-slate-800">
-    <header class="bg-slate-900 ring-slate-900/5 shadow-xl">
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="80" height="80" />
+  <header class="bg-slate-900 ring-slate-900/5 shadow-xl">
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="60" />
 
-      <div class="text-white">
-
-        <nav class="text-slate-100 grid grid-cols-5">
-          <RouterLink class="grid-cols-1" to="/">Home</RouterLink>
-          <RouterLink class="grid-cols-2" to="/about">About</RouterLink>
-        </nav>
-      </div>
-    </header>
-    <RouterView />
-  </div>
+    <div class="text-white">
+      <nav class="text-slate-300">
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+      </nav>
+    </div>
+  </header>
 </template>
 
 <style scoped>
 header {
   line-height: 1.5;
+  height: 8vh;
   max-height: 100vh;
-  height: 4vh;
-  min-height: 5vh;
+  min-height: 7vh;
+
 }
 
 .logo {
@@ -41,7 +41,7 @@ nav {
 
 nav a {
   display: inline-block;
-  padding: 0 1rem
+  padding: 0 1rem;
 }
 
 nav a:first-of-type {
