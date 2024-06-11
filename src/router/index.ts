@@ -2,8 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProjectView from '../views/ProjectView.vue'
 import About from "../views/AboutView.vue";
+import LoginView from '../views/LoginView.vue';
 import NotFound from "../views/NotFound.vue";
 import NetworkError from "../views/NetworkError.vue";
+import { isAuthenticated } from "../services/LoginService";
+
 
 const routes = [
   {
@@ -46,6 +49,16 @@ const routes = [
     component: About,
   },
   {
+    path: "/login",
+    name: "Login",
+    component: LoginView,
+  },
+  {
+    path: "/about",
+    name: "About",
+    component: LoginView,
+  },
+  {
     path: "/:catchAll(.*)",
     name: "NotFound",
     component: NotFound,
@@ -66,6 +79,12 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
+})
+
+// GOOD
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Login' && !isAuthenticated()) next({ name: 'Login' })
+  else next()
 })
 
 export default router

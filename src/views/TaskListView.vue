@@ -7,7 +7,7 @@ const task = ref("");
 const name = ref("");
 
 async function getTasks() {
-  greetMsg.value = await invoke("list_tasks", { });
+  greetMsg.value = await invoke("list_tasks", {});
 }
 </script>
 
@@ -15,6 +15,4 @@ async function getTasks() {
 
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
