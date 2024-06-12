@@ -1,4 +1,4 @@
-import {ref} from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
@@ -24,8 +24,12 @@ export const mainTimeRecordStore = defineStore('task', () => {
   // --- getters / computed
   //const doubleCount = computed(() => count.value * 2)
   // --- functions / actions
-  async function getTasks(projectId: number) {
-    tasks.value = await invoke("list_timerecords", {});
+  async function getTimeRecord(month: number) {
+    tasks.value = await invoke("list_timerecords", {
+      "list_options": {
+        "order_bys": "!mtime"
+      }
+    });
   }
   // returns an object with the properties and methods we want to expose.
   return { tasks, getTasks }

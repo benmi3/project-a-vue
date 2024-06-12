@@ -1,13 +1,14 @@
-import {ref} from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import { doLogin, doLogout } from '@/services/LoginService'
 import axios from 'axios'
 
-interface Project {
+interface UserInfo {
   id: number,
   username: string,
 }
 
-export const mainUserStore = defineStore('task', () => {
+export const mainUserStore = defineStore('user', () => {
   // -- state / ref()
   const userInfo = ref<Project>({
     id: 0,
@@ -15,19 +16,17 @@ export const mainUserStore = defineStore('task', () => {
   })
   const username = ref("")
   const loginFails = ref<number>(0)
+  const login_state = ref(false)
   // --- getters / computed
   //const doubleCount = computed(() => count.value * 2)
   // --- functions / actions
-  async function loginUser(password: string) {
-    userInfo.value = await invoke("login", {username: username.value, password: password});
-    if (userInfo.value.username === username.value) {
-      loginFails.value = 0;
-    } else {
-      loginFails.value++;
-    }
+
+
+  function isAuthenticated() {
+    return login_state.value
   }
   // returns an object with the properties and methods we want to expose.
-  return { userInfo, loginUser, loginFails }
+  return { userInfo, loginUser, loginFails, isAuthenticated }
 })
 
 

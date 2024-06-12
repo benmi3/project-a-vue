@@ -5,8 +5,7 @@ import About from "../views/AboutView.vue";
 import LoginView from '../views/LoginView.vue';
 import NotFound from "../views/NotFound.vue";
 import NetworkError from "../views/NetworkError.vue";
-import { isAuthenticated } from "../services/LoginService";
-
+import { isAuthenticated } from '@/services/LoginService';
 
 const routes = [
   {
@@ -16,7 +15,8 @@ const routes = [
   },
   {
     path: "/timerecord",
-    name: "TimeRecord",
+    name: "TimeRecords",
+    props: true,
     component: About,
   },
   {
