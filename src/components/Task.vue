@@ -2,26 +2,27 @@
 import { ref } from "vue";
 
 interface AnimalFacts {
-    text: string
+  text: string
 }
 const catFacts = ref([] as AnimalFacts[])
 const fetchingFacts = ref(false)
 async function loadMoreFacts() {
-    fetchingFacts.value = true
-    const catFactsResponse = await axios.get<AnimalFacts[]>('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=5')
-    catFacts.value.push(...(catFactsResponse.data || []))
+  fetchingFacts.value = true
+  const catFactsResponse = await axios.get<AnimalFacts[]>('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=5')
+  catFacts.value.push(...(catFactsResponse.data || []))
 
-    fetchingFacts.value = false
+  fetchingFacts.value = false
 }
 async function fetchInitialCatFacts() {
-    const catFactsResponse = await axios.get<AnimalFacts[]>('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=5')
-    catFacts.value = catFactsResponse.data
+  const catFactsResponse = await axios.get<AnimalFacts[]>('https://cat-fact.herokuapp.com/facts/random?animal_type=cat&amount=5')
+  catFacts.value = catFactsResponse.data
 }
 onMounted(async () => {
-    await fetchInitialCatFacts()
+  await fetchInitialCatFacts()
 })
 
-const</script>
+//const
+</script>
 
 <template>
   <form class="row" @submit.prevent="greet">
