@@ -1,24 +1,19 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { mainProjectStore } from "../stores/project"
+import { mainTimeRecordStore } from "../stores/timerecord.ts"
 
-const store = mainProjectStore()
+const store = mainTimeRecordStore()
 
 const props = defineProps({
-  id: { required: true, },
+  year: { required: false, },
+  month: { required: false, },
 });
 
-const project = ref(null)
+const timerecords = ref(null)
+
 
 onMounted(() => {
-  store.getProjects()
-  ProjectService.getEvent(props.id)
-    .then((response) => {
-      project.value = response.data
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+  timerecords.value = store.getTimeRecords()
 })
 
 </script>

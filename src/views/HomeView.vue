@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import ProjectCard from "../components/ProjectCard.vue"
-import ProjectService from "../services/ProjectService.ts"
+/*import ProjectStore from "../stores/project"
 
 const projects = ref(null)
 
@@ -13,15 +13,14 @@ onMounted(() => {
     .catch((error) => {
       console.log(error)
     })
-})
+})*/
 
 </script>
 
 <template>
-  <div class="projects">
-    <ProjectCard v-for="project in projects" :key="project.id" :project="project" />
-  </div>
+  <h1>Home View</h1>
 </template>
+
 
 <style>
 @media (min-width: 1024px) {

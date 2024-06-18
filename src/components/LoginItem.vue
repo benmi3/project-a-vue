@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { doLogin } from "../services/LoginService"
+import router from '../router/index.ts'
 
 
 
@@ -16,7 +17,10 @@ async function loginUser() {
   const username = usernameInput.value;
   const password = passwordInput.value;
   if (validateCredentials()) {
-    await doLogin(username, password)
+    var result = await doLogin(username, password)
+  }
+  if (result == true) {
+    router.push('/')
   }
 }
 
@@ -47,6 +51,7 @@ async function loginUser() {
         @click="loginUser">
         Sign In
       </button>
+
       <a class=" inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
         Forgot Password?
       </a>

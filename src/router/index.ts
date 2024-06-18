@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProjectView from '../views/ProjectView.vue'
+import TimeRecordView from '../views/TimeRecordView.vue'
 import About from "../views/AboutView.vue";
 import LoginView from '../views/LoginView.vue';
 import NotFound from "../views/NotFound.vue";
@@ -16,8 +17,7 @@ const routes = [
   {
     path: "/timerecord",
     name: "TimeRecords",
-    props: true,
-    component: About,
+    component: TimeRecordView,
   },
   {
     path: "/projects",
