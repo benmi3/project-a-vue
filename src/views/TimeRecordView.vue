@@ -1,7 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import TimeRecord from '@/components/TimeRecord.vue'
-
+import { mainTimeRecordStore } from "../stores/timerecord.ts"
+const store = mainTimeRecordStore()
+const timerecords = ref(null)
 
 
 const props = defineProps({
@@ -68,16 +70,20 @@ const days = ref(howManyDays(month))
     <h1 class="text-white">This is an about page</h1>
     <p class="text-slate-400 ">This is darker</p>
     <a>amount of days {{ days }}</a>
-    <TimeRecord v-for="day in days" :key="day.id" :year=year :month=month :day=day />
+    <table>
+      <thead>
+        <tr>
+          <td>Date</td>
+          <td>starttime</td>
+          <td>stoptime</td>
+          <td>place</td>
+        </tr>
+      </thead>
+      <tbody>
+        <TimeRecord v-for="day in days" :key="day.id" :year=year :month=month :day=day />
+      </tbody>
+    </table>
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<style></style>
