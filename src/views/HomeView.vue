@@ -1,6 +1,4 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import ProjectCard from "../components/ProjectCard.vue"
 /*import ProjectStore from "../stores/project"
 
 const projects = ref(null)
