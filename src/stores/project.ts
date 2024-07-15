@@ -1,17 +1,14 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import axios from "axios";
+import { BACKEND_URL, HEADERS, TIMEOUT } from './store_settings';
+
 // for now declare the axios client locally
 export const requestClient = axios.create({
-  baseURL: 'http://localhost:8080',
-  timeout: 1000,
+  baseURL: BACKEND_URL,
+  timeout: TIMEOUT,
   withCredentials: false, // needs to be same origin to be set to true
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:8080'
-
-  },
+  headers: HEADERS,
 })
 
 interface Project {
@@ -35,10 +32,10 @@ async function listProjects() {
       "filters": {
       }
     }
-  }).then(function(response) {
+  }).then(function (response) {
     updateProjectList(response.data)
   })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log(error);
     });
 
@@ -61,5 +58,3 @@ export const mainProjectStore = defineStore('project', () => {
   // returns an object with the properties and methods we want to expose.
   return { projects, getProjects }
 })
-
-
