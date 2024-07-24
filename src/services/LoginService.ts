@@ -1,33 +1,18 @@
 import { ref } from "vue";
-import axios from 'axios'
+import { make_login_request, make_logout_request } from "../lib/request";
 
-const requestClient = axios.create({
-  baseURL: 'http://localhost:8080',
-  timeout: 1000,
-  withCredentials: false, // needs to be same origin to be set to true
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': 'http://localhost:8080'
-
-  },
-})
 const successfull_login = ref(false);
 const STORAGE_KEY_LOGIN_STATE = "LOGINSTATEKEY"
 
 async function requestLogin(username: string, password: string) {
-  requestClient.post('/api/login', {
-    "username": username,
-    "pwd": password
-  }).then(function(response) {
-    setLoginState(response.data.result.success)
-  })
-    .catch(function(error) {
-      console.log(error);
-      setLoginState(false)
-    });
-
-
+  const response = await make_login_request(JSON.stringify({ "username": username, "pwd": password }))
+  const res = await response.json()
+  if (res) {
+    setLoginState(res.data.result.success)
+  } else {
+    alert("Login Failed")
+    setLoginState(false)
+  }
 }
 
 function setLoginState(value: boolean) {
@@ -53,20 +38,15 @@ export async function doLogin(username: string, password: string) {
 export async function doLogout() {
   // created this in the same pattern as login,
   // just to create error handleing and logging later
-  const logout_response = await requestClient.post('/api/logoff', {
+  const logout_response = await make_logout_request(JSON.stringify({
     logoff: true,
-  })
-  try {
-    if (logout_response.data.result.logged_off == true) {
-      successfull_login.value = false
-    } else {
-      successfull_login.value = false
-
-    }
-  } catch {
+  }));
+  const res = await logout_response.json();
+  if (res.data.result.logged_off == true) {
+    successfull_login.value = false
+  } else {
     successfull_login.value = false
   }
-  return successfull_login
 }
 
 export function isAuthenticated() {
