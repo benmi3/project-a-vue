@@ -5,11 +5,13 @@ const successfull_login = ref(false);
 const STORAGE_KEY_LOGIN_STATE = "LOGINSTATEKEY"
 
 async function requestLogin(username: string, password: string) {
-  const response = await make_login_request(JSON.stringify({ "username": username, "pwd": password }))
+  const response = await make_login_request(username, password);
   const res = await response.json()
-  if (res) {
-    setLoginState(res.data.result.success)
-  } else {
+  try {
+    if (res.result.success) {
+      setLoginState(res.result.success)
+    }
+  } catch (e) {
     alert("Login Failed")
     setLoginState(false)
   }
