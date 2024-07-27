@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { doLogin } from "../services/LoginService"
-import router from '../router/index.ts'
+import router from '../router/index'
 
 
 
@@ -18,10 +18,11 @@ async function loginUser() {
   const password = passwordInput.value;
   if (validateCredentials()) {
     var result = await doLogin(username, password)
+    if (result == true) {
+      router.push('/')
+    }
   }
-  if (result == true) {
-    router.push('/')
-  }
+
 }
 
 </script>
@@ -48,7 +49,7 @@ async function loginUser() {
     <div class="flex items-center justify-between">
       <button
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        @click="loginUser">
+        @submit.prevent="loginUser">
         Sign In
       </button>
 

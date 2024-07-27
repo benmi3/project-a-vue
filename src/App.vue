@@ -8,7 +8,6 @@ function toggleMenu() {
   showItems.value != showItems.value
 }
 
-
 </script>
 
 <template>
