@@ -1,3 +1,6 @@
+## Current Build State
+![Gitlab Runner](https://gitlab.com/project-eidetic/project-a-vue/badges/main/pipeline.svg)
+
 # my-frontend
 
 This template should help get you started developing with Vue 3 in Vite.
