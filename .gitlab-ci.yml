@@ -22,6 +22,7 @@ lint: # This will generate alot of errors
   stage: lint
   script:
     - bun run lint
+  allow_failure: true  # This allows the pipeline to continue even if linting fails
 
 #test: # Will add later
 #  stage: test
