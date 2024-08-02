@@ -1,27 +1,23 @@
-import {ref} from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import axios from 'axios'
+import type { TaskProgress } from '@/lib/structs'
+import { list_taskprogresses } from '@/lib/request';
 
-interface TaskProgress {
-  id: number,
-  taskId: number,
-  progress: number,
-  cid: number,
+async function listTasksProgress(taskId: number): Promise<Array<TaskProgress>> {
+  // TODO: add filters and options
+  const taskprogresses = await list_taskprogresses(taskId, "ctime");
+  return taskprogresses;
 }
+
 
 export const mainTimeProgressStore = defineStore('task', () => {
   // -- state / ref()
-  const taskprogresses = ref<TaskProgress[]>([{
-    id: 0,
-    taskId: 0,
-    progress: 0,
-    cid: 0,
-  },])
+  const taskprogresses = ref<TaskProgress[]>()
   // --- getters / computed
   //const doubleCount = computed(() => count.value * 2)
   // --- functions / actions
   async function getTaskProgressess(taskId: number) {
-    taskprogresses.value = await invoke("list_taskprogresses", {});
+    taskprogresses.value = await listTasksProgress(taskId);
   }
   // returns an object with the properties and methods we want to expose.
   return { taskprogresses, getTaskProgressess }
