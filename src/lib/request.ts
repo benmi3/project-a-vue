@@ -100,18 +100,6 @@ export async function list_timerecords(month: number, list_order: string): Promi
   return timerecords;
 }
 
-async function send_request(params: BodyInit): Promise<Response> {
-  const reqHeaders = new Headers({
-    "Content-Type": "application/json",
-    "X-Custom-Header": "ProcessThisImmediately",
-  });
-
-  return fetch(BACKEND_URL + "/api/rpc", {
-    method: "POST",
-    headers: reqHeaders,
-    body: params,
-  })
-}
 
 export async function make_login_request(username: String, pwd: String): Promise<Response> {
   const loginpackage: loginPackage = {
@@ -127,5 +115,34 @@ export async function make_login_request(username: String, pwd: String): Promise
     method: "POST",
     headers: reqHeaders,
     body: JSON.stringify(loginpackage),
+  })
+}
+
+export async function make_logout_request(): Promise<Response> {
+  const logoffPackage = { "logoff": true };
+
+  const reqHeaders = new Headers({
+    "Content-Type": "application/json",
+    "X-Custom-Header": "ProcessThisImmediately",
+  });
+
+  return fetch(BACKEND_URL + "/api/looff", {
+    method: "POST",
+    headers: reqHeaders,
+    body: JSON.stringify(logoffPackage),
+  })
+
+}
+
+async function send_request(params: BodyInit): Promise<Response> {
+  const reqHeaders = new Headers({
+    "Content-Type": "application/json",
+    "X-Custom-Header": "ProcessThisImmediately",
+  });
+
+  return fetch(BACKEND_URL + "/api/rpc", {
+    method: "POST",
+    headers: reqHeaders,
+    body: params,
   })
 }

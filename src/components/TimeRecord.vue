@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { mainTimeRecordStore } from '../stores/timerecord'
 
 const starttime = ref(new Date())
 
 const stoptime = ref(new Date())
 
+const store = mainTimeRecordStore();
+
+const viewMonth = ref(1)
+
 onMounted(() => {
-  timerecords.value = store.getTimeRecords()
+  store.getTimeRecords(viewMonth.value)
 })
 
 const props = defineProps({

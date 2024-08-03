@@ -40,9 +40,7 @@ export async function doLogin(username: string, password: string) {
 export async function doLogout() {
   // created this in the same pattern as login,
   // just to create error handleing and logging later
-  const logout_response = await make_logout_request(JSON.stringify({
-    logoff: true,
-  }));
+  const logout_response = await make_logout_request();
   const res = await logout_response.json();
   if (res.data.result.logged_off == true) {
     successfull_login.value = false
