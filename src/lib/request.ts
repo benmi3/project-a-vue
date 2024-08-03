@@ -101,7 +101,7 @@ export async function list_timerecords(month: number, list_order: string): Promi
 }
 
 
-export async function make_login_request(username: String, pwd: String): Promise<Response> {
+export async function make_login_request(username: string, pwd: string): Promise<Response> {
   const loginpackage: loginPackage = {
     username: username,
     pwd: pwd,

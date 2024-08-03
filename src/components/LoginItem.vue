@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { doLogin } from "../services/LoginService"
 import router from '../router/index'
+import { validateUsername, validatePassword } from "@lib/validateInput"
 
 
 
@@ -10,14 +11,15 @@ const passwordInput = ref("")
 
 
 function validateCredentials() {
-  return true
+  if (validateUsername(usernameInput.value) && validatePassword(passwordInput)) {
+    return true
+  }
+  return false
 }
 
 async function loginUser() {
-  const username = usernameInput.value;
-  const password = passwordInput.value;
   if (validateCredentials()) {
-    var result = await doLogin(username, password)
+    var result = await doLogin(usernameInput.value, passwordInput.value)
     if (result == true) {
       router.push('/')
     }
