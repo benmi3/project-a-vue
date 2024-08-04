@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { doLogin } from "../services/LoginService"
 import router from '../router/index'
-import { validateUsername, validatePassword } from "@lib/validateInput"
+import { validateUsername, validatePassword } from "..//lib/validateInput"
 
 
 
@@ -11,7 +11,7 @@ const passwordInput = ref("")
 
 
 function validateCredentials() {
-  if (validateUsername(usernameInput.value) && validatePassword(passwordInput)) {
+  if (validateUsername(usernameInput.value) && validatePassword(passwordInput.value)) {
     return true
   }
   return false
