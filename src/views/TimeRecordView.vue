@@ -1,21 +1,14 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import TimeRecord from '@/components/TimeRecord.vue'
-import { mainTimeRecordStore } from "../stores/timerecord.ts"
-const store = mainTimeRecordStore()
-const timerecords = ref(null)
+import { mainTimeRecordStore } from '../stores/timerecord'
+const store = mainTimeRecordStore();
 
+const viewMonth = ref(1)
 
-const props = defineProps({
-  year: { required: false, },
-  month: { required: false, },
-});
-
-const year = props.year ? props.yeair : 2024;
-const month = props.month ? props.month : 6;
-
-onMounted(() => console.log(month))
-
+onMounted(() => {
+  store.getTimeRecords(viewMonth.value)
+})
 
 const januar = 31
 const februar = (year % 4 == 0) ? 29 : 28;
@@ -80,7 +73,7 @@ const days = ref(howManyDays(month))
         </tr>
       </thead>
       <tbody>
-        <TimeRecord v-for="day in days" :key="day.id" :year=year :month=month :day=day />
+        <TimeRecord v-for="timerecord in store.timerecords" :key="timerecord" />
       </tbody>
     </table>
   </div>

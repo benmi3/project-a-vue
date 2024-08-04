@@ -29,7 +29,7 @@ export interface TaskProgress {
 export interface TimeRecord {
   id: number,
   place: string,
-  starTime: string,
+  startTime: string,
   stopTime: string,
   cid: number,
 }
